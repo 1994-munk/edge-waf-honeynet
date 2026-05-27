@@ -1,0 +1,13 @@
+title: SSH Credential Stuffing in Cowrie
+id: 7b1b6a6e-9c2e-4d2c-9a40-7c5ed5b3e002
+status: stable
+description: >
+  More than 20 failed logins from a single IP within 5 minutes against the
+  Cowrie honeypot. This is almost always credential stuffing.
+logsource: { product: cowrie }
+detection:
+  failed: { eventid: 'cowrie.login.failed' }
+  timeframe: 5m
+  condition: failed | count() by src_ip > 20
+level: high
+tags: [attack.t1110.003]

@@ -1,0 +1,18 @@
+title: Path Traversal Attempt at Edge
+id: 7b1b6a6e-9c2e-4d2c-9a40-7c5ed5b3e001
+status: stable
+description: Detects classic path traversal sequences in URI.
+author: Shirleen Gatu
+date: 2025/09/09
+logsource: { product: nginx, service: access }
+detection:
+  selection:
+    uri|contains:
+      - '../'
+      - '%2e%2e/'
+      - '%2e%2e%2f'
+  condition: selection
+level: medium
+falsepositives:
+  - Legacy clients that double-encode paths
+tags: [attack.t1190]

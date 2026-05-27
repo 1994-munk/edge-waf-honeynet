@@ -1,0 +1,6 @@
+---
+- name: Configure edge security stack
+  hosts: edges
+  gather_facts: false
+  serial: 1
+  roles: [edge-sec]

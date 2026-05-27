@@ -1,0 +1,24 @@
+[DEFAULT]
+bantime  = 1h
+findtime = 10m
+maxretry = 5
+backend  = polling
+banaction = iptables-multiport
+
+[modsec-anomaly]
+enabled  = true
+filter   = modsec-anomaly
+logpath  = /var/log/nginx/sec.json
+maxretry = 3
+findtime = 5m
+bantime  = 6h
+port     = http,https
+
+[cowrie-bruteforce]
+enabled  = true
+filter   = cowrie
+logpath  = /var/log/cowrie/cowrie.json
+maxretry = 8
+findtime = 10m
+bantime  = 24h
+port     = 22,2222

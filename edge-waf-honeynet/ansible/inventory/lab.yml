@@ -1,0 +1,5 @@
+all:
+  children:
+    edges:
+      hosts:
+        edge-iad: { ansible_host: edge, ansible_connection: docker }

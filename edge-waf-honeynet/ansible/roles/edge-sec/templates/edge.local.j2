@@ -1,0 +1,5 @@
+[modsec-anomaly]
+enabled = true
+maxretry = {{ modsec_maxretry | default(3) }}
+findtime = {{ modsec_findtime | default('5m') }}
+bantime  = {{ modsec_bantime  | default('6h') }}

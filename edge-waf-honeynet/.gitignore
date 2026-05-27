@@ -1,0 +1,5 @@
+*.log
+*.pcap
+honeypot/data/
+.env
+__pycache__/

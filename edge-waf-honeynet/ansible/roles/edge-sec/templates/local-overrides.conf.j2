@@ -1,0 +1,7 @@
+# Managed by Ansible.
+SecRule REQUEST_URI "@beginsWith /wp-login.php" \
+  "id:1100,phase:1,deny,status:418,log,msg:'wp-login probed'"
+{% for path in extra_block_paths | default([]) %}
+SecRule REQUEST_URI "@beginsWith {{ path }}" \
+  "id:{{ 1200 + loop.index0 }},phase:1,deny,status:403,log,msg:'blocked {{ path }}'"
+{% endfor %}

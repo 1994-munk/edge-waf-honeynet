@@ -1,0 +1,22 @@
+---
+- name: Render WAF override rules
+  ansible.builtin.template:
+    src: local-overrides.conf.j2
+    dest: /etc/nginx/modsec/rules/local-overrides.conf
+    mode: "0644"
+    validate: "nginx -t -c /etc/nginx/nginx.conf"
+  notify: reload nginx
+
+- name: Render fail2ban jail
+  ansible.builtin.template:
+    src: edge.local.j2
+    dest: /etc/fail2ban/jail.d/edge.local
+    mode: "0644"
+  notify: reload fail2ban
+
+- name: Verify edge responds after change
+  ansible.builtin.uri:
+    url: http://localhost/
+    status_code: 200,403
+  retries: 5
+  delay: 2
