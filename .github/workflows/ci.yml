@@ -3,6 +3,9 @@ on: [push, pull_request]
 jobs:
   validate:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: edge-waf-honeynet
     steps:
       - uses: actions/checkout@v4
 
@@ -20,7 +23,7 @@ jobs:
           pip install sigma-cli pyyaml
           # ensure missing-glob doesn't pass literal pattern through
           shopt -s nullglob || true
-          for f in edge-waf-honeynet/detections/sigma/*.yml; do
+          for f in detections/sigma/*.yml; do
             [ -f "$f" ] || continue
             python -c "import yaml,sys; yaml.safe_load(open('$f'))" && echo "ok $f"
           done
